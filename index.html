@@ -4,38 +4,63 @@
 <meta charset="utf-8">
 <title>MindAR Target Tracking</title>
 
+<!-- A-Frame (must load first) -->
 <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+
+<!-- Animation support for GLB -->
+<script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+
+<!-- MindAR -->
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
 <style>
-body { margin: 0; overflow: hidden; }
-a-scene { width: 100vw; height: 100vh; }
+  body {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  /* Fix fullscreen AR camera issue */
+  a-scene {
+    width: 100vw;
+    height: 100vh;
+  }
 </style>
 </head>
 
 <body>
 
 <a-scene 
-  mindar-image="imageTargetSrc: ./targets.mind;"
+  mindar-image="
+    imageTargetSrc: ./targets.mind;
+    filterMinCF: 0.001;
+    filterBeta: 0.01;
+  "
   color-space="sRGB"
   embedded
   vr-mode-ui="enabled: false"
   device-orientation-permission-ui="enabled: true"
 >
 
-<a-assets>
-  <a-asset-item id="model" src="./model.glb"></a-asset-item>
-</a-assets>
+  <!-- Load 3D model -->
+  <a-assets>
+    <a-asset-item id="model" src="./model.glb"></a-asset-item>
+  </a-assets>
 
-<a-entity mindar-image-target="targetIndex: 0">
-  <a-entity 
-    gltf-model="#model"
-    scale="0.3 0.3 0.3"
-    position="0 0 0">
+  <!-- Image target -->
+  <a-entity mindar-image-target="targetIndex: 0">
+
+    <!-- 3D Model anchored to target -->
+    <a-entity
+      gltf-model="#model"
+      animation-mixer
+      scale="0.3 0.3 0.3"
+      position="0 0 0">
+    </a-entity>
+
   </a-entity>
-</a-entity>
 
-<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+  <!-- Camera -->
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
 </a-scene>
 
