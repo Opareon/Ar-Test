@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <title>MindAR Target Tracking</title>
 
-<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
 <style>
 body { margin: 0; overflow: hidden; }
@@ -15,7 +15,7 @@ body { margin: 0; overflow: hidden; }
 <body>
 
 <a-scene 
-  mindar-image="imageTargetSrc: targets.mind;"
+  mindar-image="imageTargetSrc: ./targets.mind;"
   color-space="sRGB"
   embedded
   vr-mode-ui="enabled: false"
@@ -23,10 +23,9 @@ body { margin: 0; overflow: hidden; }
 >
 
   <a-assets>
-    <a-asset-item id="model" src="model.glb"></a-asset-item>
+    <a-asset-item id="model" src="./model.glb"></a-asset-item>
   </a-assets>
 
-  <!-- Target index 0 -->
   <a-entity mindar-image-target="targetIndex: 0">
     <a-box color="red" depth="0.5" height="0.5" width="0.5"></a-box>
   </a-entity>
